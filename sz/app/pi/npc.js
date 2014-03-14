@@ -5,7 +5,7 @@ Sz_App_Pi_Npc = Sz_Engine_StackableAbstract.extend({
 		this.htmlId = "sz_npc" + Math.round(Math.random() * 999999999)
 
 
-		$('body').append('<div style="height:10px; width:10px; outline:1px solid yellow; position:absolute;" id="' + this.htmlId + '">i</div>')
+		$('body').append('<img src="sz/app/pi/img/npc/npc1.png" style="height:24px; width:24px; position:absolute;" id="' + this.htmlId + '" />')
 		this.top = Math.round(Math.random() * 100)
 		this.left = Math.round(Math.random() * 100)
 		this.obj = $('#' + this.htmlId);
@@ -17,7 +17,7 @@ Sz_App_Pi_Npc = Sz_Engine_StackableAbstract.extend({
 		})
 	},
 	onKeyDown: function(code){
-		this.obj.html(this._name + ':' + code)
+		//this.obj.html(this._name + ':' + code)
 		if(code===37){
 			this.left -= 5
 		}else if(code===38){

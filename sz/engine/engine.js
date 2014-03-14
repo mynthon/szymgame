@@ -55,3 +55,5 @@ Sz_Engine_Engine.prototype = {
 		}
 	}
 }
+
+$SZ_ENGINE = new Sz_Engine_Engine()
