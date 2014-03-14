@@ -1,0 +1,4 @@
+engine = new Sz_Engine_Engine()
+engine.addObject(new Sz_App_Pi_Npc('Dziwak'));
+engine.addObject(new Sz_App_Pi_Npc('majko'));
+engine.start()
