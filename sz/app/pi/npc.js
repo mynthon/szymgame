@@ -1,16 +1,16 @@
-Sz_App_Pi_Npc = Sz_Engine_StackableAbstract.extend({
+Sz_App_Pi_Npc = Sz_Engine_Quark_Dynamic.extend({
 	init: function(name){
 		this._super(name)
 
 		this.htmlId = "sz_npc" + Math.round(Math.random() * 999999999)
 
 
-		$('body').append('<img src="sz/app/pi/img/npc/npc1.png" style="height:24px; width:24px; position:absolute;" id="' + this.htmlId + '" />')
+		$('body').append('<img src="sz/app/pi/img/npc/npc1.png" style="height:24px; width:24px; position:absolute;z-index: 500;" id="' + this.htmlId + '" />')
 		this.top = Math.round(Math.random() * 100)
 		this.left = Math.round(Math.random() * 100)
 		this.obj = $('#' + this.htmlId);
 	},
-	onEnterFrame: function(){
+	onFrame: function(){
 		this.obj.css({
 			top: this.top,
 			left: this.left

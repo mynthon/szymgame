@@ -1,4 +1,4 @@
-Sz_App_Pi_SectorAbstract = Sz_Engine_StackableAbstract.extend({
+Sz_App_Pi_SectorAbstract = Sz_Engine_Quark_Static.extend({
 	init: function(name){
 		this._super(name);
 		this._mx = [

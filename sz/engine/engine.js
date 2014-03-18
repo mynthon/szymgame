@@ -1,12 +1,19 @@
 
-var Sz_Engine_Engine = function(){
-	this.fps = 40
-	this.timer = null
-	this.keystack = [] // temp, should be replaced with queue object
-	this.objects = []
-	this.objectsByName = {}
-	this.locked = false
-	this.paused = false
+var Sz_Engine_Engine = function(name, options){
+	this.fps = 100;
+	this.timer = null;
+	this.keystack = []; // temp, should be replaced with queue object
+	this.currentKey = 0;
+	this.objectsByName = {};
+	this.locked = false;
+	this.paused = false;
+
+	this._root = null;
+	window[name] = this;
+	options;
+
+	this._initRoot();
+
 }
 
 Sz_Engine_Engine.prototype = {
@@ -22,15 +29,25 @@ Sz_Engine_Engine.prototype = {
 		this.timer = setInterval(function(){that.frame()}, 1000/this.fps)
 	},
 
+	_initRoot: function(){
+		var name = '_root'
+		var root = new Sz_Engine_Quark_Dynamic(name)
+
+		root._engine = this
+		root._parent = root
+		root._root = root
+
+		this.objectsByName[name] = root;
+		this.objectsByName[name].onAdd();
+		this._root = this.objectsByName[name]
+	},
+
 	frame: function(){
 		if (this.locked || this.paused){return}
 		this.locked = true
 
-		var keydown = this.keystack.length ? this.keystack.shift() : 0
-		for (var i = 0; i < this.objects.length; i++){
-			if(keydown){this.objects[i].onKeyDown(keydown)}
-			this.objects[i].onEnterFrame()
-		}
+		this.currentKey = this.keystack.length ? this.keystack.shift() : 0
+		this._root.__frame()
 
 		this.locked = false
 	},
@@ -41,19 +58,6 @@ Sz_Engine_Engine.prototype = {
 
 	unpause: function(){
 		this.paused = false
-	},
-
-	addObject: function(stackable){
-		var n = stackable._name
-
-		if (this.objectsByName[n]){
-			console.log('Object with name "' + n + '" already exists!')
-		} else {
-			this.objectsByName[n] = stackable;
-			this.objects.push(this.objectsByName[n]);
-			this.objectsByName[n].onLoad();
-		}
 	}
 }
 
-$SZ_ENGINE = new Sz_Engine_Engine()

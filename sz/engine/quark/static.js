@@ -1,0 +1,1 @@
+Sz_Engine_Quark_Static = Sz_Engine_Quark_Abstract.extend({})
