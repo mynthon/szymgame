@@ -11,21 +11,24 @@ Sz_App_Pi_Npc = Sz_Engine_Quark_Dynamic.extend({
 		this.obj = $('#' + this.htmlId);
 	},
 	onFrame: function(){
+		var keys = this._engine.keys
+	
+		if(keys[37]){
+			this.left -= 3
+		}
+		if(keys[38]){
+			this.top -= 3
+		}
+		if(keys[39]){
+			this.left += 3
+		}
+		if(keys[40]){
+			this.top += 3
+		}
+	
 		this.obj.css({
 			top: this.top,
 			left: this.left
 		})
-	},
-	onKeyDown: function(code){
-		//this.obj.html(this._name + ':' + code)
-		if(code===37){
-			this.left -= 5
-		}else if(code===38){
-			this.top -= 5
-		}else if(code===39){
-			this.left += 5
-		}else if(code===40){
-			this.top += 5
-		}
 	}
 })

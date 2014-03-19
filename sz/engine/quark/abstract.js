@@ -20,5 +20,4 @@ Sz_Engine_Quark_Abstract = Class.extend({
 	onFrame: function(){return this;},
 	onAdd: function(){return this;},
 	onRemove: function(){return this;},
-	onKeyDown:function(){return this;}
 })

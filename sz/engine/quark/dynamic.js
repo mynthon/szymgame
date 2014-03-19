@@ -3,7 +3,7 @@ Sz_Engine_Quark_Dynamic = Sz_Engine_Quark_Abstract.extend({
 		for (var i = 0; i < this._children.length; i++){
 			this._children[i].__frame()
 		}
-		if(this._engine.currentKey){this.onKeyDown(this._engine.currentKey)}
+
 		this.onFrame()
 	},
 
