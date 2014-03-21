@@ -1,0 +1,179 @@
+w = 20
+h = 20
+m = []
+
+var sign = function(n){return n && n / Math.abs(n);}
+
+function tdcolor(x,y,color){
+    $('#td' + x + '_'+ y).css('background', color)
+}
+
+function tdcursor(x,y){
+    $('#td' + x + '_'+ y).append($('#cursor'))
+}
+
+$('#movetable').remove()
+$('body').append($('<table id="movetable"></table>'))
+var table = $('#movetable')
+$('body').append($('<div id="cursor" style="width:5px; height:5px; background:red;"></div>'))
+var cursor =$('#cursor')
+
+
+
+init = function(){
+    for (var i = 0; i < h; i++){
+        var tr = $('<tr />')
+        m[i] = []
+        for (var j = 0; j < w; j++){
+            m[i][j] = 0;
+            var td = $('<td id="td' + j + '_' + i + '"/>')    
+            td.css('background', '#eeeeee')
+            td.css('width', '5px')
+            td.css('height', '5px')
+            tr.append(td)
+        }
+        table.append(tr)
+    }
+}
+
+
+init ()
+
+
+
+
+startPoint = []
+setStartPoint = function(){
+    var sp = (Math.round(Math.random() * ((h-4)/2)) + 1) * 2
+    m[sp][0] = 1
+    m[sp][1] = 1
+    startPoint = sp
+
+}
+
+setStartPoint()
+console.log(startPoint)
+tdcolor(0, startPoint, 'yellow')
+
+
+//place random points
+var rnd = []
+var rndX = w/2 - 2
+var rndY = h/2 - 1
+var rx, ry
+var lastrnd
+r = 0
+
+while(r<15){
+    rx = Math.round(Math.random()*rndX) * 2+2
+    ry = Math.round(Math.random()*rndY) * 2
+    
+    if (rnd.length > 0){
+        lastrnd = rnd[rnd.length-1]
+    }
+
+    if (lastrnd){
+        if (Math.abs(rx - lastrnd[0]) < 8 || Math.abs(ry - lastrnd[1]) < 8) {
+            continue
+        }
+    }
+
+
+    rnd[r] = [rx,ry]
+    m[ry][rx] = 1
+    tdcolor(rx, ry, 'yellow')
+       r++
+}
+
+
+for (var z = 0; z < h; z++){
+    console.log(m[z])
+}
+
+
+goTo = function(current, target){
+    if (!target){return}
+    m[current[1]][current[0]] = 1
+    tdcolor(current[0], current[1], 'green')
+    tdcursor(current[0], current[1])
+
+    //console.log(current, target)
+
+    if(current[0] === target[0] && current[1] === target[1]){
+        setTimeout(function(){goTo(current, rnd.pop())}, 50)
+    }else{
+
+        var dx = target[0] - current[0]
+        var dy =  target[1] - current[1]
+        var c = [current[0], current[1]]
+        
+        if (current[0]%2 === 0 && current[1] % 2 ===0){
+
+            /*var chance = 1 - (Math.abs(dx)/2)/100
+            if (Math.random() < chance){
+               // dx = 0;
+            }
+
+            var chance = 1 - (Math.abs(dy)/2)/100
+            if (Math.random() < chance){
+                //dy = 0;
+            }*/
+
+            var prefferx = 0
+            var preffery = 0
+    
+
+            if (m[current[1]][current[0] + sign(dx)] === 0){
+                prefferx = 1
+            }
+
+            if (m[current[1] + sign(dy)][current[0]] === 0){
+                preffery = 1
+            }
+
+            if (prefferx && !preffery){
+                dy = 0
+            }else if(!prefferx && preffery){
+                dx = 0
+            }else if(prefferx && preffery){
+                if (Math.random() < 0.5){
+                        dx = 0;
+                } else {
+                        dy = 0
+                }
+            }else{
+
+                if(dx !== 0 && dy !== 0){
+                    if (Math.random() < 0.5){
+                        dx = 0;
+                    } else {
+                        dy = 0
+                    }
+                }
+            }
+
+
+        } else {
+            if (current[0]%2 === 0){
+                dx = 0
+            }
+             if (current[1]%2 === 0){
+                dy = 0
+            }
+            //yesli nieparzysty  nieparzysty x, to musi x
+//jesli nieparzysty y to musi y
+}
+        c[0] = current[0] + sign(dx)
+        c[1] = current[1] + sign(dy)
+//console.log(c)
+        setTimeout(function(){goTo(c, target)}, 50);
+
+    }
+}
+
+
+goTo([1, startPoint], rnd.pop())
+console.log('paths')
+for (var z = 0; z < h; z++){
+    console.log(m[z])
+}

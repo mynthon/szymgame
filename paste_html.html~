@@ -8,8 +8,8 @@
 <script type="text/javascript" src="sz/engine/engine.js"></script>
 
 <script type="text/javascript" src="sz/app/pi/npc.js"></script>
-<script type="text/javascript" src="sz/app/pi/sectors/abstract.js"></script>
-<script type="text/javascript" src="sz/app/pi/sectors/1000110010001001a.js"></script>
+<script type="text/javascript" src="sz/app/pi/sectorAbstract.js"></script>
+<script type="text/javascript" src="sz/app/pi/sectorAaa.js"></script>
 <script type="text/javascript" src="sz/app/pi/boo.js"></script>
 <body>
 

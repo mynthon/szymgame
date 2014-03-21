@@ -1,0 +1,78 @@
+w = 20
+h = 20
+m = []
+
+for (var i = 0; i < h; i++){
+    m[i] = []
+    for (var j = 0; j < w; j++){
+        m[i][j] = 0;
+    }
+}
+
+
+startPoint = (Math.round(Math.random() * ((h-4)/2)) + 1) * 2
+
+m[startPoint][0] = 1
+
+
+goV = function(direction, x, y){
+    while (y >= 0 && y < h){
+        m[y][x] = 1;
+
+        if (y%2===0 && x%2===0){
+            var chance = Math.random()
+            if (chance > 0 && chance <= 0.3){
+                        return
+        }else if (chance > 0.25 && chance <= 0.6){
+                        goH(x, y)
+        }
+}
+        
+        y+=direction
+    }
+}
+
+goH = function(x, y){
+    //horizontally we can go only forward
+    var chance
+    var chanceMod = (100 - ((100/w)*x) ) / 100
+
+            while (x < w-1){
+                m[y][x] = 1
+
+                if (y%2===0 && x%2===0){
+
+                    chance = Math.random()
+           
+                    if (chance  < 0.3){
+                        goV(-1, x, y)
+                    }
+
+                    chance = Math.random()
+                    if (chance  < 0.3){
+                        goV(1, x, y)
+                    }
+
+                    
+                    chance = Math.random()
+                    if (chance  < 1 - chanceMod){
+                        break;
+                    }
+
+
+                }
+
+                x = x + 1
+
+            }
+        
+
+}
+
+goH(1, startPoint)
+
+
+
+for (var z = 0; z < h; z++){
+    console.log(m[z])
+}
