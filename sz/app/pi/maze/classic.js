@@ -1,11 +1,11 @@
 
-var ClassicMazeGenerator = function(width, height){
-	this.init()
+var Sz_App_Pi_Maze_Classic = function(){
+
 }
 
 
 
-ClassicMaze.prototype = function(){
+Sz_App_Pi_Maze_Classic.prototype = {
 	init: function(width, height) {
 		this.w = width;
 		this.h = height;

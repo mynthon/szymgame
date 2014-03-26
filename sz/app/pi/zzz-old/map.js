@@ -1,6 +1,8 @@
 Sz_App_Pi_Map = Sz_Engine_Quark_Static.extend({
 	onAdd: function(){
 		this.availSectors = []
+		this.startSectors = []
+		this.endSectors = []
 		this.walkable = []
 		this.sectors = []
 		this.width = 4
@@ -8,13 +10,16 @@ Sz_App_Pi_Map = Sz_Engine_Quark_Static.extend({
 	},
 
 
-	addSectors: functon(){
+	addSectors: function(){
 		this.availSectors.push(new Sz_App_Pi_Sectors_t0000a())
 		this.availSectors.push(new Sz_App_Pi_Sectors_t0104a())
 		this.availSectors.push(new Sz_App_Pi_Sectors_t0401a())
 	},
 
-	fillFirstColumn:
+	fillFirstColumn: function(){
+	//first column is specific. First start point has to be added
+
+	},
 
 	checkArea: function(initx, inity){
 		var ret = ['n', 'e', 's', 'w']
