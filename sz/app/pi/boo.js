@@ -1,9 +1,35 @@
-Sz_App_Pi_Boo = Sz_Engine_Quark_Static.extend({
+Sz_App_Pi_Boo = Sz_Engine_Quark_Dynamic.extend({
 	onAdd: function(){
-		var x = Math.random() * 200
-		var y = Math.random() * 200
-		this.boo = $('<div style="width:11px; height:10px; position:absolute; top: '+x+'px; left:'+y+'px; background: url(sz/app/pi/img/boo.png); z-index:520" />')
+		this._x = Math.floor(Math.random() * 200)
+		this._y = Math.floor(Math.random() * 200)
+		this.boo = $('<div style="width:11px; height:10px; position:absolute; top: '+this._x+'px; left:'+this._y+'px; background: url(sz/app/pi/img/boo.png); z-index:520" />')
 		$('body').append(this.boo)
+
+		this.nextX = this._x
+		this.nextY = this._y
+	},
+	
+	onFrame: function(){
+		
+		this.timer--;
+		//console.log(this.timer)
+		var step = 2
+		if (this._x < this.nextX-step){
+			this._x += step
+		} else if (this._x > this.nextX+step){
+			this._x -= step
+		} else if (this._y < this.nextY-step){
+			this._y += step
+		} else if (this._y > this.nextY+step){
+			this._y -= step
+		} else {
+			this.nextX = Math.floor(Math.random()*500) + 50
+			this.nextY = Math.floor(Math.random()*500) + 50
+		}
+
+			
+			this.boo.css({top:this._y, left:this._x})
+			
 	}
 
 })
