@@ -13,7 +13,7 @@ Sz_App_Pi_Boo = Sz_Engine_Quark_Dynamic.extend({
 		
 		this.timer--;
 		//console.log(this.timer)
-		var step = 2
+		var step = 1
 		if (this._x < this.nextX-step){
 			this._x += step
 		} else if (this._x > this.nextX+step){
