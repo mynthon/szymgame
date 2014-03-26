@@ -1,5 +1,6 @@
 
 var Sz_Engine_Engine = function(name, options){
+	this.name = name
 	this.fps = 30;
 	this.timer = null;
 	this.keys = []
