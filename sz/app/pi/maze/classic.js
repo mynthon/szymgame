@@ -13,7 +13,7 @@ Sz_App_Pi_Maze_Classic.prototype = {
 		this.checkpoints = [];
 		
 		this.clearMap()
-		var starty = (Math.round(Math.random()*(h-2)/2))*2+1
+		var starty = (Math.round(Math.random()*(this.h-2)/2))*2+1
 		this.generateMaze(0, starty)
 		
 		

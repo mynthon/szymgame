@@ -33,9 +33,8 @@ Sz_Engine_Quark_Dynamic = Sz_Engine_Quark_Abstract.extend({
 
 		this._engine.objectsByName[n] = stackableChild;
 		this._children.push(this._engine.objectsByName[n]);
-		this._engine.objectsByName[n].onAdd();
 		this['qr_' + n] = this._engine.objectsByName[n]
-
+		this._engine.objectsByName[n].onAdd();
 		return this;
 	},
 })

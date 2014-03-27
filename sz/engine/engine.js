@@ -35,7 +35,7 @@ Sz_Engine_Engine.prototype = {
 
 	_initRoot: function(){
 		var name = '_root'
-		var root = new Sz_Engine_Quark_Dynamic(name)
+		var root = new Sz_Engine_Root(name)
 
 		root._engine = this
 		root._parent = root
