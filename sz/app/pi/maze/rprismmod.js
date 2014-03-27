@@ -1,22 +1,29 @@
 
 var Sz_App_Pi_Maze_Rprismmod = function(){
-
+	this.init()
 }
 
 
 
 Sz_App_Pi_Maze_Rprismmod.prototype = {
-	init: function(width, height) {
-		this.w = width;
-		this.h = height;
+	init: function() {
 		this.map = [];
 		this.cells = []
-		
+		this.startPoint = []
+		this.endPoint = []
+	},
+	
+	create: function(width, height){
+		this.init()
+		this.setSize(width, height)
 		this.clearMap()
-		var starty = (Math.round(Math.random()*(this.h-2)/2))*2+1
-		this.generateMaze(0, starty)
-		
-		
+		this.generateStartPoint()
+		this.generateMaze(this.startPoint[0], this.startPoint[1])
+	},
+	
+	setSize: function(width, height){
+		this.w = width
+		this.h = height
 	},
 	
 	clearMap: function(){
@@ -28,6 +35,42 @@ Sz_App_Pi_Maze_Rprismmod.prototype = {
 				map[i][j] = 0
 			}
 		} 
+	},
+	
+	generateStartPoint: function(){
+		var max = (this.h-2) / 4
+		this.startPoint =  [0, (Math.round(Math.random()*(max)/2))*2+1]
+	},
+	
+	generateEndPoint: function(){
+		var points = []
+		var boundary = Math.floor(this.h * 0.7)
+		for(var i = this.h-1; i>=0; i--){
+			if (i % 2 === 0){
+				continue
+			}
+			if (this.map[i][this.w-2] === 0) {
+				continue
+			}
+			if (i >= boundary){
+				points.push(i)
+			}else {
+				if (points.length > 0){
+					break
+				}else{
+					points.push(i)
+				}
+				
+			}
+			
+		}
+		
+		var y = points.splice(Math.round(Math.random() * (points.length-1)), 1)
+		
+		this.endPoint = [this.w-1, y]
+		
+		
+		
 	},
 	
 	
@@ -96,7 +139,8 @@ Sz_App_Pi_Maze_Rprismmod.prototype = {
 			map[conn[2]][conn[3]] = 1
 		}
 		
-		
+		this.generateEndPoint()
+		map[this.endPoint[1]][this.endPoint[0]] = 1
 
 
 	},
