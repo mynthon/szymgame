@@ -2,11 +2,23 @@ Sz_App_Pi_Boo = Sz_Engine_Quark_Dynamic.extend({
 	onAdd: function(){
 		this._x = Math.floor(Math.random() * 200)
 		this._y = Math.floor(Math.random() * 200)
-		this.boo = $('<div style="width:11px; height:10px; position:absolute; top: '+this._x+'px; left:'+this._y+'px; background: url(sz/app/pi/img/boo.png); z-index:520" />')
-		$('body').append(this.boo)
+		this._width = 11
+		this._height = 10
+		
+		this._$.css({
+			background: 'url(sz/app/pi/img/boo.png)', 
+			zIndex:520
+		});
 
+		this._parent._$.append(this._$);
+
+		
 		this.nextX = this._x
 		this.nextY = this._y
+		this.placeOnScreen()
+		this._refresh()
+		
+
 	},
 	
 	onFrame: function(){
@@ -28,7 +40,7 @@ Sz_App_Pi_Boo = Sz_Engine_Quark_Dynamic.extend({
 		}
 
 			
-			this.boo.css({top:this._y, left:this._x})
+			this._refresh()
 			
 	}
 
