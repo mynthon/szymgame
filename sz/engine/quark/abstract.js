@@ -34,7 +34,7 @@ Sz_Engine_Quark_Abstract = Class.extend({
 	onAdd: function(){return this;},
 	onRemove: function(){return this;},
 	
-	placeOnScreen: function(){
+	placeOnScreen: function(){/*this is wrong because it allows place element only in parent?*/
 		if (!this.__placed){
 			this.__placed = true
 			this._parent._$.append(this._$)
@@ -56,12 +56,45 @@ Sz_Engine_Quark_Abstract = Class.extend({
 		return this._x
 	},
 	
+	/*
+	 * Sets x relative to root. Returns x relative to root
+	 */
+	X: function(position){
+		var of = this._$.offset()
+		var l = of['left']
+		var rof = this._root._$.offset()
+		var rl = rof ['left']
+		var absx = l - rl
+		
+		if (position){
+			var delta = position - absx
+			this.x(this.x + delta)
+		}
+		
+		return absx;	
+	},
+	
 	y: function(position){
 		if (position){
 			this._y = position
-			this._$.css('left', position)
+			this._$.css('top', position)
 		}
 		return this._y
+	},
+	
+	Y: function(position){
+		var of = this._$.offset()
+		var t = of['top']
+		var rof = this._root._$.offset()
+		var rt = rof ['top']
+		var absy = t - rt
+		
+		if (position){
+			var delta = position - absy
+			this.y(this.y + delta)
+		}
+		
+		return absy;
 	},
 	
 	width: function(width){
@@ -72,7 +105,7 @@ Sz_Engine_Quark_Abstract = Class.extend({
 		return this._width
 	},
 	
-	y: function(height){
+	height: function(height){
 		if (height){
 			this._height = height
 			this._$.css('height', height)

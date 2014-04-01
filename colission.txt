@@ -1,0 +1,27 @@
+
+
+a = [-10, -10, 20, 20]
+b = [-5, -5, 5, 5]
+
+s1 = a[0] < 0 ? -1 : 1
+s2 = a[1] < 0 ? -1 : 1
+s3 = b[0] < 0 ? -1 : 1
+s4 = b[1] < 0 ? -1 : 1
+
+aw5 = a[2] / 2
+ah5 = a[3] / 2
+bw5 = b[2] / 2
+bh5 = b[3] / 2
+
+sw = aw5 + bw5
+sh = ah5 + bh5
+
+acw = a[0] + s1*aw5
+ach = a[1] + s2*ah5
+bcw = b[0] + s3*bw5
+bch = b[1] + s4*bh5
+
+console.log(sw, sh)
+if (Math.abs (acw - bcw) <= sw && Math.abs(ach - bch) <= sh){
+    console.log('collision')
+}

@@ -17,3 +17,16 @@ engine.start()
 engine._root.qr_mainmap.$
 
 ```
+
+
+
+ * quark
+   * height()
+   * width()
+   * x()
+   * X()
+   * y()
+   * Y()
+   * Class static
+   * Class dynamic
+   * Class root (special, not extendable)

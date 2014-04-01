@@ -1,7 +1,7 @@
 Sz_App_Pi_Map = Sz_Engine_Quark_Dynamic.extend({
 	onAdd: function(){
-		this.$ = $('<div style="width:200px; height:200px; border:1px solid #eee; position:relative;" />')
-		this._root.$.append(this.$)
+		this._$ = $('<div style="width:200px; height:200px; border:1px solid #eee; position:relative;" />')
+		this._root._$.append(this._$)
 		this.generator = new Sz_App_Pi_Maze_Rprismmod()
 		this.generator.create(41, 41)
 	},
@@ -31,7 +31,7 @@ Sz_App_Pi_Map = Sz_Engine_Quark_Dynamic.extend({
 						'background':'orange'
 					})
 					
-					this.$.append(div)
+					this._$.append(div)
 					
 				}
 			}

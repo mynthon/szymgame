@@ -9,6 +9,8 @@ Sz_App_Pi_Boo = Sz_Engine_Quark_Dynamic.extend({
 			background: 'url(sz/app/pi/img/boo.png)', 
 			zIndex:520
 		});
+		
+		this._$.attr('id', 'boo')
 
 		this._parent._$.append(this._$);
 
