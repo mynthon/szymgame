@@ -151,11 +151,11 @@ Sz_App_Pi_Maze_Rprismmod.prototype = {
 			var tr = $('<tr>');
 			for (var f  = 0; f < this.w; f++){
 				var td = $('<td />')
-				td.css({width:5, height:5})
+				td.css({width:32, height:32})
 				if (this.map[z][f] === 1){
-					td.css('background', 'yellow')
+					td.css('background', '#fffff4')
 				}else{
-					td.css('background', 'orange')
+					td.css('background', '#fde8a0')
 				}
 				tr.append(td)
 			}

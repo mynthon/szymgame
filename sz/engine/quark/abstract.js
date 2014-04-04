@@ -57,7 +57,7 @@ Sz_Engine_Quark_Abstract = Class.extend({
 	},
 	
 	/*
-	 * Sets x relative to root. Returns x relative to root
+	 * Sets/gets x relative to root. Returns x relative to root
 	 */
 	X: function(position){
 		var of = this._$.offset()
@@ -82,6 +82,9 @@ Sz_Engine_Quark_Abstract = Class.extend({
 		return this._y
 	},
 	
+	/*
+	 * Sets/gets y relative to root
+	 */
 	Y: function(position){
 		var of = this._$.offset()
 		var t = of['top']
@@ -112,4 +115,35 @@ Sz_Engine_Quark_Abstract = Class.extend({
 		}
 		return this._height
 	},
+	
+	overlap: function(targetName){
+		var t = this._engine.objectsByName[targetName]
+		
+		var a = [this.X(), this.Y(), this.width(), this.height()]
+		var b = [t.X(), t.Y(), t.width(), t.height()]
+		
+		var s1 = a[0] < 0 ? -1 : 1
+		var s2 = a[1] < 0 ? -1 : 1
+		var s3 = b[0] < 0 ? -1 : 1
+		var s4 = b[1] < 0 ? -1 : 1
+
+		var aw5 = a[2] / 2
+		var ah5 = a[3] / 2
+		var bw5 = b[2] / 2
+		var bh5 = b[3] / 2
+
+		var sw = aw5 + bw5
+		var sh = ah5 + bh5
+
+		var acw = a[0] + s1*aw5
+		var ach = a[1] + s2*ah5
+		var bcw = b[0] + s3*bw5
+		var bch = b[1] + s4*bh5
+
+		if (Math.abs (acw - bcw) <= sw && Math.abs(ach - bch) <= sh){
+			return true;
+		}else{
+			return false;
+		}
+	}
 })

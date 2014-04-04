@@ -1,34 +1,63 @@
 Sz_App_Pi_Npc = Sz_Engine_Quark_Dynamic.extend({
-	init: function(name){
-		this._super(name)
+	
+	onAdd: function(){
+		this.map = this._engine.objectsByName['mainmap']
+		this._x = 0
+		this._y = this.map.generator.startPoint[1] * this.map.wallHeight
+		this._width = 24
+		this._height = 24
+		
+		this._$.css({
+			background: 'url(sz/app/pi/img/minsc.png)', 
+			zIndex:520
+		});
+		
+		this._$.attr('id', 'boo')
 
-		this.htmlId = "sz_npc" + Math.round(Math.random() * 999999999)
-
-
-		$('body').append('<img src="sz/app/pi/img/minsc.png" style="height:24px; width:24px; position:absolute;z-index: 500;" id="' + this.htmlId + '" />')
-		this.top = Math.round(Math.random() * 100)
-		this.left = Math.round(Math.random() * 100)
-		this.obj = $('#' + this.htmlId);
+		this.placeOnScreen()
+		this._refresh()
+		
 	},
+	
+	
+	
 	onFrame: function(){
+		var map = this.map
 		var keys = this._engine.keys
+		
+		if (this.overlap('Boo')){
+			console.log('catched!')
+		}
 	
 		if(keys[37]){
-			this.left -= 3
+			var d = this.x() - 3
+			
+			if (map.isWalkable(d, this.y()) && map.isWalkable(d, this.y() + this.height())){
+				this.x(this.x() - 3)
+			}
 		}
 		if(keys[38]){
-			this.top -= 3
+			var d = this.y() - 3
+			
+			if (map.isWalkable(this.x(), d) && map.isWalkable(this.x() + this.width(), d)){
+				this.y(this.y() - 3)
+			}
 		}
 		if(keys[39]){
-			this.left += 3
+			var d = this.x() + 3 + this.width()
+			
+			if (map.isWalkable(d, this.y()) && map.isWalkable(d, this.y() + this.height())){
+				this.x(this.x() +3)
+			}
 		}
 		if(keys[40]){
-			this.top += 3
+			var d = this.y() + 3 + this.height()
+			
+			if (map.isWalkable(this.x(), d) && map.isWalkable(this.x() + this.width(), d)){
+				this.y(this.y() + 3)
+			}
 		}
 	
-		this.obj.css({
-			top: this.top,
-			left: this.left
-		})
+
 	}
 })

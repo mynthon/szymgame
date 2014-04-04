@@ -11,9 +11,6 @@ Sz_App_Pi_Boo = Sz_Engine_Quark_Dynamic.extend({
 		});
 		
 		this._$.attr('id', 'boo')
-
-		this._parent._$.append(this._$);
-
 		
 		this.nextX = this._x
 		this.nextY = this._y
